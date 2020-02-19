@@ -19,6 +19,7 @@
             <pluginExecutionFilter>
                 <goals>
                     <goal>npm</goal>
+                    <goal>cnpm</goal>
                     <goal>yarn</goal>
                     <goal>gulp</goal>
                     <goal>grunt</goal>

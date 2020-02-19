@@ -5,6 +5,7 @@ import java.io.File;
 public interface NodeExecutorConfig {
   File getNodePath();
   File getNpmPath();
+  File getCnpmPath();
   File getInstallDirectory();
   File getWorkingDirectory();
   Platform getPlatform();
@@ -15,8 +16,10 @@ final class InstallNodeExecutorConfig implements NodeExecutorConfig {
   private static final String NODE_WINDOWS = NodeInstaller.INSTALL_PATH.replaceAll("/", "\\\\") + "\\node.exe";
   private static final String NODE_DEFAULT = NodeInstaller.INSTALL_PATH + "/node";
   private static final String NPM = NodeInstaller.INSTALL_PATH + "/node_modules/npm/bin/npm-cli.js";
+  private static final String CNPM = NodeInstaller.INSTALL_PATH + "/node_modules/cnpm/bin/cnpm";
 
-  private final InstallConfig installConfig;
+
+    private final InstallConfig installConfig;
 
   public InstallNodeExecutorConfig(InstallConfig installConfig) {
     this.installConfig = installConfig;
@@ -34,10 +37,15 @@ final class InstallNodeExecutorConfig implements NodeExecutorConfig {
   }
 
   @Override
+  public File getCnpmPath() {
+    return new File(installConfig.getInstallDirectory() + Utils.normalize(CNPM));
+  }
+
+  @Override
   public File getInstallDirectory() {
     return installConfig.getInstallDirectory();
   }
-  
+
   @Override
   public File getWorkingDirectory() {
     return installConfig.getWorkingDirectory();
